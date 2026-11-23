@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+  Black rectangular welding table, modelled as ONE box.
+
+  FRAME CONVENTION (important, everything else depends on it):
+    The link frame "table_top" has its origin at the CENTER OF THE TOP SURFACE.
+      x = along the table length, y = along the table width, z = up.
+    The box therefore hangs BELOW the frame: its center is at z = -height/2.
+
+  !! The numbers below are PLACEHOLDERS. Measure the real table (length, width, height)
+  !! and edit them. Units are meters. If you change the height here, also change
+  !! TABLE_TOP_HEIGHT in scripts/03_table_and_robot.py (same number).
+-->
+<robot name="welding_table">
+  <link name="table_top">
+    <inertial>
+      <!-- Mass 100 kg is a guess. The table is welded to the world, so it never moves
+           and the exact value does not matter, but Drake wants a valid inertia. -->
+      <origin xyz="0 0 -0.45" rpy="0 0 0"/>
+      <mass value="100"/>
+      <!-- Solid box: ixx = m/12*(w^2+h^2), iyy = m/12*(l^2+h^2), izz = m/12*(l^2+w^2) -->
+      <inertia ixx="12.08" iyy="18.75" izz="17.33" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.45" rpy="0 0 0"/>   <!-- -height/2 -->
+      <geometry><box size="1.2 0.8 0.9"/></geometry>   <!-- length width height -->
+      <material name="black"><color rgba="0.05 0.05 0.05 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.45" rpy="0 0 0"/>
+      <geometry><box size="1.2 0.8 0.9"/></geometry>
+    </collision>
+  </link>
+</robot>

@@ -1,0 +1,30 @@
+
+<?xml version="1.0"?>
+<!--
+  Test "electronic product": a light-grey aluminium-like plate, 160 x 100 x 20 mm.
+  The screw holes are NOT part of this file. They are drawn as black discs by the script,
+  from one list of hole positions (HOLES_IN_OBJECT), so there is a single place to edit them.
+
+  FRAME CONVENTION (same idea as the table): the link frame "object_top" has its origin
+  at the CENTER OF THE TOP FACE, x along the length, y along the width, z up.
+  The box hangs below the frame, so its center is at z = -height/2 = -0.01.
+-->
+<robot name="plate_with_holes">
+  <link name="object_top">
+    <inertial>
+      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <!-- solid box, m = 1 kg: ixx = m/12*(w^2+h^2), iyy = m/12*(l^2+h^2), izz = m/12*(l^2+w^2) -->
+      <inertia ixx="0.000867" iyy="0.002167" izz="0.00297" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+      <geometry><box size="0.16 0.10 0.02"/></geometry>
+      <material name="plate_red"><color rgba="0.85 0.1 0.1 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+      <geometry><box size="0.16 0.10 0.02"/></geometry>
+    </collision>
+  </link>
+</robot>
